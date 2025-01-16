@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,ImageBackground } from 'react-native';
-
 export default function App() {
-
+  
   return (
     <ImageBackground
       source={require('./bg.png')}
-      style={{zIndex:'-1'}}
+      style={{flex:1,resizeMode:'cover'}}
     >
       <ImageBackground
         source={require('./12320.png')}
@@ -18,6 +17,9 @@ export default function App() {
         }}
       >小知，你的校园生活小助手</Text>
     </ImageBackground>
+
+
+
   );
 }
 
