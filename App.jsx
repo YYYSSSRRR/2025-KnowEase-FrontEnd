@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,ImageBackground,Image,Pressable,Dimensions } fro
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import Login from './Login'
+import LoginPage from './LoginPage'
 import Agreement from './Agreement';
 const {width,height}=Dimensions.get('window')
 const Stack = createStackNavigator()
@@ -51,7 +51,7 @@ export default function App(){
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start" screenOptions={{headerShown:false}}>
         <Stack.Screen name="Start" component={Start}></Stack.Screen>
-        <Stack.Screen name="Login" component={Login}></Stack.Screen>
+        <Stack.Screen name="Login" component={LoginPage}></Stack.Screen>
         <Stack.Screen name="Agreement" component={Agreement}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
