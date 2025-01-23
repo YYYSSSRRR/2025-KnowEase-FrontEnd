@@ -5,6 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import LoginPage from './LoginPage'
 import Agreement from './Agreement';
+import Register from './Register'
+import SetPassword from './SetPassword'
+import ForgetPassword from './ForgetPassword'
+import LifeZone from './LifeZone';
+import AddPost from './AddPost';
+import ResetPassword from './ResetPassword';
 const {width,height}=Dimensions.get('window')
 const Stack = createStackNavigator()
 function Start(){
@@ -37,7 +43,9 @@ function Start(){
             style={{lineHeight:height*0.06,textAlign:'center',color:'white',fontSize:20}}
           >立即登录</Text>
         </Pressable>
-        <Pressable>
+        <Pressable
+          onPress={()=>{navigation.navigate('Register')}}
+        >
           <Text
             style={{color:'white',fontSize:height*0.016}}
           >还没有账号?去注册</Text>
@@ -53,6 +61,12 @@ export default function App(){
         <Stack.Screen name="Start" component={Start}></Stack.Screen>
         <Stack.Screen name="Login" component={LoginPage}></Stack.Screen>
         <Stack.Screen name="Agreement" component={Agreement}></Stack.Screen>
+        <Stack.Screen name='Register' component={Register}></Stack.Screen>
+        <Stack.Screen name='SetPassword' component={SetPassword}></Stack.Screen>
+        <Stack.Screen name='ForgetPassword' component={ForgetPassword}></Stack.Screen>
+        <Stack.Screen name='LifeZone' component={LifeZone}></Stack.Screen>
+        <Stack.Screen name='AddPost' component={AddPost}></Stack.Screen>
+        <Stack.Screen name='ResetPassword' component={ResetPassword}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

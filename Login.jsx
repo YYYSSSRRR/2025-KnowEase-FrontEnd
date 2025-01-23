@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View,Image,Pressable,Dimensions,TextInput } from 'react-native';
 import React,{useEffect, useState,useContext} from 'react';
+import { useNavigation } from '@react-navigation/native';
 const {width,height}=Dimensions.get('window')
 const styles=StyleSheet.create({
     container:{
@@ -23,6 +24,7 @@ const styles=StyleSheet.create({
 })
 
 function Input1({email,inputSetEmail,password,inputSetPassword}){
+    const navigation=useNavigation()
     return(  
         <View style={{width:width*0.5,display:'flex'}}>
             <TextInput
@@ -41,7 +43,11 @@ function Input1({email,inputSetEmail,password,inputSetPassword}){
                     inputSetPassword(e.nativeEvent.text)
                 }}
             ></TextInput>
-            <Text style={styles.pwForget}>忘记密码？</Text>
+            <Pressable
+                onPress={()=>{navigation.navigate('ForgetPassword')}}
+            >
+                <Text style={styles.pwForget}>忘记密码？</Text>
+            </Pressable>
         </View>
     )
 }
@@ -71,4 +77,5 @@ function Input2({email,setEmail,verification,setVerification,onSendVerification}
         </View>
     )
 }
+
 export {Input1,Input2};
