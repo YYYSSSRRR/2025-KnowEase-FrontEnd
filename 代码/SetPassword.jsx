@@ -54,7 +54,7 @@ export default function SetPassword({route}){
     }
     return(
         <View style={styles.container}>
-            <Image source={require('./logo_proc.jpg')}
+            <Image source={require('../图片/logo1.jpg')}
                 style={{width:width*0.2,height:height*0.1,marginBottom:height*0.03}}
             ></Image>
             <Text
@@ -95,7 +95,7 @@ export default function SetPassword({route}){
                 >已经有账号？去登录</Text>
             </Pressable>
             <Image
-                source={require('./树叶bg.png')}
+                source={require('../图片/树叶bg.png')}
                 style={{width:width,height:height*0.3}}
             ></Image>
         </View>

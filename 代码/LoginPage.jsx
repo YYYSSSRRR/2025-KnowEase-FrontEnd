@@ -32,7 +32,7 @@ function Framework({children,handleSubmit1,handleSubmit2,pwLogin,isChecked,setPw
     const navigation=useNavigation()
     return(
         <View style={styles.container}>
-            <Image source={require('./logo_proc.jpg')}
+            <Image source={require('../图片/logo1.jpg')}
                 style={{width:width*0.2,height:height*0.1,marginBottom:height*0.03}}
             ></Image>
             <Text
@@ -87,7 +87,7 @@ function Framework({children,handleSubmit1,handleSubmit2,pwLogin,isChecked,setPw
                 >还没有账号?去注册</Text>
             </Pressable>
             <Image
-                source={require('./树叶bg.png')}
+                source={require('../图片/树叶bg.png')}
                 style={{width:width,height:height*0.3}}
             ></Image>
         </View>
@@ -108,9 +108,28 @@ export default function LoginPage(){
                 password:password.current
             })
             .then((response)=>{
-                AsyncStorage.setItem('imageUrl',response.data.usermessage.url)
+                AsyncStorage.setItem('token',response.data.token)
+                AsyncStorage.setItem('userId',response.data.usermessage.ID)
+                AsyncStorage.setItem('profile',response.data.usermessage.url)
+                AsyncStorage.setItem('backgroundImage',response.data.usermessage.backgroundURL)
+                AsyncStorage.setItem('userName',response.data.usermessage.Username)
+                AsyncStorage.setItem('email',response.data.usermessage.email)
                 navigation.navigate('LifeZone')
-                
+                console.log('success')
+                console.log(response.data.usermessage.email)
+                AsyncStorage.getItem('token')
+                .then(token=>{
+                    console.log(token);
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+                AsyncStorage.getItem('userId')
+                .then(id=>console.log(id))
+                .catch(error=>console.log(error))
+                AsyncStorage.getItem('profile')
+                .then(url=>console.log(url))
+                .catch(err=>console.log(err))
             })
             .catch(error=>{
                 console.log({email,password})
@@ -128,8 +147,9 @@ export default function LoginPage(){
                 code:verifiation.current,
                 email:email.current
             })
-            .then(()=>{
-                navigation.navigate('Agreement')
+            .then((response)=>{
+                AsyncStorage.setItem('token',response.data.token)
+                navigation.navigate('LifeZone')
             })
             .catch((error)=>{
                 console.log(error)
