@@ -47,7 +47,7 @@ function Start(){
         >
           <Text
             style={{lineHeight:height*0.06,textAlign:'center',color:'white',fontSize:20}}
-          >立即登录</Text>
+          >立即登录111</Text>
         </Pressable>
         <Pressable
           onPress={()=>{navigation.navigate('Register')}}
