@@ -58,7 +58,6 @@ export default function EditInformation(){
     const [email,setEmail]=useState('');
     const navigation=useNavigation();
     async function uploadQiniu(file){
-        console.log('running')
         const tokenData=await AsyncStorage.getItem('token');
         try{
             const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
