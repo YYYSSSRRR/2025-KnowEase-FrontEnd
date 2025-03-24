@@ -10,7 +10,6 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
     const [replyCountMap,setReplyCountMap]=useState({});
     const [replyStatusMap,setReplyStatusMap]=useState({});
     async function handleSubmitReply(commentid,id) {
-        console.log('1')
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         console.log('sending')
@@ -133,7 +132,8 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
     async function handleLike(commentid,replyid){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${commentid}/${replyid}/like`,{},{
+        if(!replyStatusMap[replyid])
+        {axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/${commentid}/${replyid}/like`,{},{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -141,14 +141,61 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
         .then(()=>{
             updateReply(commentid,replyid)
         })
-        .catch(err=>console.log(err.response.data))
-        
+        .catch(err=>console.log(err.response.data))}
+        else{
+            axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/${commentid}/${replyid}/cancellike`,{},{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
+            .then(()=>{
+                updateReply(commentid,replyid)
+            })
+            .catch(err=>console.log(err.response.data))
+        }
     }
-    
+    useEffect(()=>{
+        const updateReplyStatus=async()=>{
+            try {
+                const userId = await AsyncStorage.getItem('userId');
+                const token = await AsyncStorage.getItem('token');
+                const requests = a.Reply.map(async (b) => {
+                    const response = await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getcounts`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    const data = await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getstatus`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    return {
+                        commentid: b.commentid,
+                        likecount: response.data.likecount,
+                        LikeStatus: data.data.LikeStatus
+                    };
+                });
+                const results = await Promise.all(requests);
+                const newCommentLikeMap = {};
+                const newCommentLikeStatusMap = {};
+                results.forEach((result) => {
+                    newCommentLikeMap[result.commentid] = result.likecount;
+                    newCommentLikeStatusMap[result.commentid] = result.LikeStatus;
+                });
+                // console.log(newCommentLikeStatusMap,'hhh');
+                setReplyCountMap(newCommentLikeMap);
+                setReplyStatusMap(newCommentLikeStatusMap);
+            } catch (err) {
+                console.log('初始化评论点赞信息出错:', err);
+            }
+        };
+        updateReplyStatus();
+    },[a.Reply])
     return(
         <View key={a.commentid}>
             {a.Reply && a.Reply.map((b)=>{
-                updateReply(a.commentid,b.commentid)
+                // updateReply(a.commentid,b.commentid)
                 return(
                     <View key={b.commentid} style={{marginTop:height*0.03}}>
                         <Text>{b.ReplyerName} 回复 {name} </Text>

@@ -8,7 +8,8 @@ const {width,height}=Dimensions.get('window')
 const styles=StyleSheet.create({
     topBackground:{
         height:height*0.25,
-        width:width
+        width:width,
+        opacity:0.9,
     },
     topProfileInformation:{
         marginTop:height*0.08,
@@ -32,7 +33,7 @@ const styles=StyleSheet.create({
         
     },
     topText:{
-        fontSize:width*0.035
+        fontSize:width*0.035,
     },
     editeButton:{
         borderWidth:1.5,
@@ -70,7 +71,6 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-around',
         height:height*0.07,
-        borderBottomWidth:1,
         borderTopWidth:1,
         borderColor:'grey',
         padding:height*0.01,
@@ -127,107 +127,6 @@ export default function My(){
         }
         
     }
-    // async function handleChangeBackGround(){
-    //     const token=await AsyncStorage.getItem('token');
-    //     const userId=await AsyncStorage.getItem('userId');
-    //     axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterbackground`,{
-    //         backgroundURL:backgroundImage
-    //     },{
-    //         headers:{
-    //             'Authorization':`Bearer ${token}`
-    //         }
-    //     })
-    //     .then(()=>{
-    //         console.log('更换背景成功');
-    //         // console.log(backgroundImage)
-    //     })
-    //     .catch((err)=>console.log(err))
-    // }
-    // async function uploadQiniu(file){
-    //     const tokenData=await AsyncStorage.getItem('token');
-    //     if(!tokenData){
-    //         console.log('failed');
-    //     }
-    //     else{
-    //         console.log('successful');
-    //         console.log(tokenData)
-    //         try{
-    //             const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
-    //                 headers:{
-    //                     'Authorization':`Bearer ${tokenData}`
-    //                 }
-    //             });
-    //             console.log(uploadToken.data.token);
-    //             const formData=new FormData();
-    //             formData.append('file',{
-    //                 uri: file.uri,
-    //                 type: file.type,
-    //                 name: file.name
-    //             });
-    //             formData.append('token',uploadToken.data.token);
-    //             console.log('sending')
-    //             axios.post('https://up-z2.qiniup.com',formData,{
-    //                 headers:{
-    //                     'Content-Type':'multipart/form-data'
-    //                 }
-    //             })
-    //             .then(response=>{
-    //                 console.log(response.data);
-    //                 const data=response.data;
-    //                 if(data.key){
-    //                     console.log('上传成功',data);
-    //                     setBackgroundImage('https://mini-project.muxixyz.com/'+data.key);
-    //                     console.log(backgroundImage)
-    //                 }
-    //                 else{
-    //                     console.log('失败')
-    //                 }
-    //             })
-    //             .catch(error=>{
-    //                 console.log(error,'失败');
-    //                 if (error.response) {
-    //                     console.log('服务器响应数据:', error.response.data);
-    //                     console.log('服务器响应状态码:', error.response.status);
-    //                     console.log('服务器响应头:', error.response.headers);
-    //                 } else if (error.request) {
-    //                     console.log('请求已发送，但未收到响应:', error.request);
-    //                 } else {
-    //                     console.log('请求设置出错:', error.message);
-    //                 }
-    //             })
-    //         }
-    //         catch(error){
-    //             console.log(error)
-    //         }
-    //     }
-    // }
-    // const requestPermission=async ()=>{
-    //         const {status}=await ImagePicker.requestMediaLibraryPermissionsAsync();
-    //         if(status!=='granted'){
-    //             Alert.alert('Permission required', 'You need to grant access to the photo library')
-    //             return false;
-    //         }
-    //         return true;
-    //     }
-    // async function pickImage(){
-    //     const permissionGranted=await requestPermission();
-    //         if(!permissionGranted) return;
-    //         const result=await ImagePicker.launchImageLibraryAsync({
-    //             mediaTypes:'images',
-    //             allowsEditing:true,
-    //             aspect:[4,3],
-    //             quality:1,
-    //         });
-    //         if(!result.canceled){
-    //             const file={
-    //                 uri:result.assets[0].uri,
-    //                 type:result.assets[0].mimeType,
-    //                 name:result.assets[0].fileName
-    //             }
-    //             await uploadQiniu(file);
-    //             handleChangeBackGround();
-    //         }
-    // }
     async function handleLogOut(){
         const token=await AsyncStorage.getItem('token');
         axios.post('http://8.152.214.138:8080/api/logout',{},{
@@ -258,7 +157,6 @@ export default function My(){
                     <View>
                         <Text style={{lineHeight:height*0.05,fontSize:width*0.04}}>{userName}</Text>
                         <Text>ID:{userId}</Text>
-                        
                     </View>
                 </View>
                 <Pressable>
@@ -292,27 +190,38 @@ export default function My(){
                 <View style={styles.bodyNavigator}>
                     <Image source={require('../图片/发布买卖(1).png')} style={styles.icon}></Image>
                     <Text style={styles.text}>发布</Text>
-                    <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    <Pressable onPress={()=>{navigation.navigate('PostRecord')}} style={styles.detail}>
+                        <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    </Pressable>
                 </View>
                 <View  style={styles.bodyNavigator}>
                     <Image source={require('../图片/浏览记录 (2)(1).png')} style={styles.icon}></Image>
                     <Text style={styles.text}>浏览记录</Text>
-                    <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    
+                    <Pressable onPress={()=>{navigation.navigate('ViewRecord')}} style={styles.detail}>
+                        <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    </Pressable>
                 </View>
                 <View  style={styles.bodyNavigator}>
                     <Image style={styles.icon} source={require('../图片/点赞 红心.png')}></Image>
                     <Text style={styles.text}>点赞</Text>
-                    <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    <Pressable onPress={()=>{navigation.navigate('LikeRecord')}} style={styles.detail}>
+                        <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    </Pressable>
                 </View>
                 <View  style={styles.bodyNavigator}>
                     <Image style={styles.icon} source={require('../图片/收藏 (2)(1).png')}></Image>
                     <Text style={styles.text} >收藏</Text>
-                    <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    <Pressable onPress={()=>{navigation.navigate('SaveRecord')}} style={styles.detail}>
+                        <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    </Pressable>
                 </View>
                 <View  style={styles.bodyNavigator}>
                     <Image style={styles.icon} source={require('../图片/消息 (1)(1).png')}></Image>
                     <Text style={styles.text}>消息</Text>
-                    <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    <Pressable onPress={()=>{navigation.navigate('MyMessage')}} style={styles.detail}>
+                        <Image source={require('../图片/详情(1).png')} style={styles.detail}></Image>
+                    </Pressable>
                 </View>
                 <View  style={styles.bodyNavigator}>
                     <Image style={styles.icon} source={require('../图片/隐私 (1)(1).png')}></Image>
@@ -332,22 +241,24 @@ export default function My(){
                 </Pressable>
                 
                 <View style={styles.bottom}>
-                    <Pressable>
+                    <Pressable onPress={()=>navigation.navigate('Question')} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                         <Image source={require('../图片/问号.jpg')}></Image>
                         <Text style={{color:'#A1A8AD'}}>问答</Text>
                     </Pressable>
-                    <Pressable onPress={()=>{navigation.navigate('LifeZone')}}>
+                    <Pressable onPress={()=>{navigation.navigate('LifeZone')}} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                         <Image source={require('../图片/生活.jpg')}></Image>
                         <Text style={{color:'#A1A8AD'}}>生活</Text>
                     </Pressable>
                     <Pressable>
                         <Image source={require('../图片/发布帖子.jpg')}></Image>
                     </Pressable>
-                    <Pressable>
+                    <Pressable onPress={()=>{
+                        navigation.navigate('AIChat')
+                    }} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                         <Image source={require('../图片/聊天.png')} ></Image>
                         <Text style={{color:'#A1A8AD'}}>聊天</Text>
                     </Pressable>
-                    <Pressable>
+                    <Pressable style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                         <Image source={require('../图片/我的（绿）.png')} style={styles.bottomImage}></Image>
                         <Text style={{color:'#63AD64',textAlign:'center'}}>我的</Text>
                     </Pressable>

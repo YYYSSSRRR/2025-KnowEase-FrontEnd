@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React,{useState,useRef,useEffect} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LifePosts from './LifePosts';
 const {width,height}=Dimensions.get('window')
 const styles=StyleSheet.create({
     head:{
@@ -33,7 +34,7 @@ const styles=StyleSheet.create({
     },
     searchPhoto:{
         height:height*0.03,
-        width:width*0.07
+        width:width*0.065,
     },
     navigation:{
         display:'flex',
@@ -116,7 +117,9 @@ function Framework({children,tag,setTag}){
             <View style={styles.head}>
                 <Image source={{uri:profileUrl}} style={styles.profilePhoto} ></Image>
                 <Image source={require('../图片/logo1.jpg')} style={styles.logo}></Image>
-                <Pressable  style={styles.search}>
+                <Pressable  style={styles.search} onPress={()=>{
+                    navigation.navigate('Search')
+                }}>
                     <Image source={require('../图片/search.jpg')} style={styles.searchPhoto}></Image>
                 </Pressable>
             </View>
@@ -153,27 +156,31 @@ function Framework({children,tag,setTag}){
                 </Pressable>
             </View>
             <View style={styles.content}>
-                <ScrollView>
+                <ScrollView
+                    showsVerticalScrollIndicator={false} 
+                >
                     {children}
                 </ScrollView>
             </View>
             <View style={styles.bottom}>
-                <Pressable>
+                <Pressable onPress={()=>navigation.navigate('Question')} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                     <Image source={require('../图片/问号.jpg')}></Image>
                     <Text style={{color:'#A1A8AD'}}>问答</Text>
                 </Pressable>
-                <Pressable>
+                <Pressable style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                     <Image source={require('../图片/房子.jpg')}></Image>
                     <Text style={{color:'#63AD64'}}>生活</Text>
                 </Pressable>
-                <Pressable  onPress={()=>{navigation.navigate('AddPost')}}>
+                <Pressable  onPress={()=>{navigation.navigate('AddPost')}} >
                     <Image source={require('../图片/发布帖子.jpg')}></Image>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={()=>{
+                    navigation.navigate('AIChat');
+                }} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                     <Image source={require('../图片/聊天.png')} style={{height:height*0.03,width:height*0.03}}></Image>
                     <Text style={{color:'#A1A8AD'}}>聊天</Text>
                 </Pressable>
-                <Pressable onPress={()=>navigation.navigate('My')}>
+                <Pressable onPress={()=>navigation.navigate('My')} style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
                     <Image source={require('../图片/形状.jpg')}></Image>
                     <Text style={{color:'#A1A8AD'}}>我的</Text>
                 </Pressable>
@@ -239,31 +246,7 @@ export default function LifeZone(){
     },[tag])
     return(
         <Framework tag={tag} setTag={setTag}>
-            {campusPosts?campusPosts.map((a,index)=>{
-                return(
-                    <Pressable onPress={()=>{
-                            navigation.navigate('PostDetail',{
-                                PostID:a.PostID,
-                            });
-                        }}  key={index}>
-                        <View style={styles.passage}>
-                            <Image source={{uri:a.urls}} style={styles.passageImage}></Image>
-                            <View style={styles.passageTitle}>
-                                <Image source={{uri:a.PosterURL}} style={styles.passageTitleProfile}></Image>
-                                <View style={{marginLeft:width*0.03}}>
-                                    <Text style={{fontSize:width*0.04,marginBottom:height*0.01}}>{a.title}</Text>
-                                    <Text style={{fontSize:width*0.03}}>{a.PosterName}</Text>
-                                </View>
-                                
-                                <View style={{display:'flex',flexDirection:'row',position:'absolute',right:width*0.04}}>
-                                    <Image source={require('../图片/已点赞(1).png')} style={styles.like}></Image>
-                                    <Text style={{marginLeft:width*0.02}}>{a.LikeCount}</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </Pressable>
-                )
-            }):null}
+            {campusPosts?<LifePosts posts={campusPosts}></LifePosts>:null}
         </Framework>
     );
 }

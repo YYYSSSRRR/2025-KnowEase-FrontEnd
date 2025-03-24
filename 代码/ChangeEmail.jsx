@@ -2,6 +2,8 @@ import { StyleSheet, Text, View,Image,Pressable,Dimensions,TextInput,createConte
 import { useState,useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import getItem from '../src/utils/information';
 const {width,height}=Dimensions.get('window')
 const styles=StyleSheet.create({
     container:{
@@ -21,24 +23,61 @@ const styles=StyleSheet.create({
         display:'flex',
         alignSelf:'flex-end',
         color:'#929EB2'
+    },
+    return:{
+        width:width*0.08,
+        height:height*0.04,
+        position:'absolute',
+        left:width*0.02,
+        top:-height*0.04
     }
 })
 export default function ChangeEmail(){
     const navigation=useNavigation()
     const [verifiation,setVerifiation]=useState('')
     const [email,setEmail]=useState('')
-    function onSendVerification(){
-        axios.post('http://8.152.214.138:8080/api/register/sendemail',{
+    async function onSendVerification() {
+        try{
+            const userId=await AsyncStorage.getItem('userId');
+            const token=await AsyncStorage.getItem('token');
+            axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/sendemail`,{
+                email:email
+            },{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            })
+            .then(()=>{console.log('发送成功')})
+            .catch(err=>{
+                console.log(err)
+                console.log(userId)
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    async function handleSubmit() {
+        const userId=await AsyncStorage.getItem('userId');
+        const token=await AsyncStorage.getItem('token');
+        axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alteremail`,{
+            code:verifiation,
             email:email
+        },{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
         })
-        .then(()=>console.log('success'))
-        .catch((error)=>{
-            console.log(email)
-            console.log(error)
+        .then(()=>{
+            navigation.navigate('My')
         })
+        .catch(err=>console.log(err))
     }
     return(
         <View style={styles.container}>
+            <Pressable style={styles.return} onPress={()=>{navigation.goBack()}}>
+                <Image  style={styles.return}source={require('../图片/返回 (1)(1).png')}></Image>
+            </Pressable>
             <Image source={require('../图片/logo1.jpg')}
                 style={{width:width*0.2,height:height*0.1,marginBottom:height*0.03}}
             ></Image>
@@ -51,14 +90,14 @@ export default function ChangeEmail(){
                         style={styles.input}
                         placeholder='输入Email'
                         value={email}
-                        onChange={e=>setEmail(e.nativeEvent.text)}
+                        onChangeText={text=>setEmail(text)}
                     ></TextInput>
                     <View style={{width:width*0.5}}>
                         <TextInput
                             style={styles.input}
                             placeholder='输入验证码'
                             value={verifiation}
-                            onChange={e=>setVerifiation(e.nativeEvent.text)}
+                            onChangeText={text=>setVerifiation(text)}
                         >
                         </TextInput>
 
@@ -72,6 +111,7 @@ export default function ChangeEmail(){
             </View>
             <Pressable
                 style={{backgroundColor:'#61B15A',width:width*0.7,height:height*0.06,borderRadius:10,marginBottom:height*0.01,marginTop:height*0.1}}
+                onPress={handleSubmit}
                 
             >
                 <Text

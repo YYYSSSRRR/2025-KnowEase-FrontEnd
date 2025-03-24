@@ -78,6 +78,10 @@ const styles=StyleSheet.create({
         backgroundColor:'white',
         borderRadius:width*0.02
     },
+    returnButton:{
+        height:height*0.04,
+        width:width*0.08
+    }
 })
 export default function AddPost(){
     const navigation=useNavigation();
@@ -195,8 +199,8 @@ export default function AddPost(){
         })
         .then(()=>{
             console.log('发布成功');
-            console.log(title);
-            console.log(imageUrl)
+            // console.log(title);
+            // console.log(imageUrl)
             navigation.navigate('LifeZone')
         }
         )
@@ -205,8 +209,8 @@ export default function AddPost(){
     return(
         <View>
             <View style={styles.navigator}>
-                <Pressable style={{marginLeft:width*0.01}} onPress={()=>{navigation.navigate('LifeZone')}}>
-                    <Image source={require('../图片/返回 (1)(1).png')}></Image>
+                <Pressable style={{marginLeft:width*0.01}} onPress={()=>{navigation.goBack()}}>
+                    <Image source={require('../图片/返回 (1)(1).png')} style={styles.returnButton}></Image>
                 </Pressable>
                 <Text style={styles.navigatorTitle}>生活</Text>
                 <Pressable style={styles.postButton} onPress={handleSubmit}>

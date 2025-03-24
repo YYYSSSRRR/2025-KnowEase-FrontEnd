@@ -14,35 +14,32 @@
     },
     "ios": {
       "supportsTablet": true,
-      "runtimeVersion": {
-        "policy": "appVersion"
-      },
+      "runtimeVersion": "1.0.0",
       "infoPlist": {
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
         }
-      }
-      
+      },
+      "bundleIdentifier": "com.muxixyz.xiaozhi"
     },
     "android": {
-        "package": "com.muxixyz.xiaozhi",
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/adaptive-icon.png",
-          "backgroundColor": "#ffffff"
-        },
-        "runtimeVersion": "1.0.0",
-        "permissions": [
-          "android.permission.INTERNET"
-        ]
+      "package": "com.muxixyz.xiaozhi",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       },
-      "web": {
-        "favicon": "./assets/favicon.png"
-      },
-      "jsEngine": "hermes",
-      
-      "updates": {
-        "url": "https://u.expo.dev/60bb7fe7-164d-44ec-9dff-dbbb585cf464"
-      },
+      "runtimeVersion": "1.0.0",
+      "permissions": [
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "jsEngine": "hermes",
+    "updates": {
+      "url": "https://u.expo.dev/60bb7fe7-164d-44ec-9dff-dbbb585cf464"
+    },
     "extra": {
       "eas": {
         "projectId": "60bb7fe7-164d-44ec-9dff-dbbb585cf464"

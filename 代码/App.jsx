@@ -1,9 +1,6 @@
-
-import { StyleSheet, Text, View,ImageBackground,Image,Pressable,Dimensions } from 'react-native';
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-import { useState,useContext,createContext } from "react";
 import LoginPage from './LoginPage';
 import Agreement from './Agreement';
 import Register from './Register'
@@ -16,50 +13,24 @@ import My from './My';
 import PostDetail from './PostDetail';
 import EditInformation from './EditInformation';
 import ChangeEmail from './ChangeEmail';
-import ChatScreen from './ChatScreen';
-const {width,height}=Dimensions.get('window')
+import ChangePassword from './ChangePassword';
+import OtherPeople from './OtherPeople';
+import LikeRecord from './LikeRecord';
+import ViewRecord from './ViewRecord';
+import Start from './Start';
+import SaveRecord from './SaveRecord';
+import MyMessage from './MyMessage';
+import Qusetion from './Question';
+import AddQuestion from './AddQuestion';
+import PostRecord from './PostRecord';
+import QuestionDetail from './QuestionDetail';
+import Search from './Search';
+import SearchPostResult from './SearchPostResult';
+import AIChat from './AIChat';
+import ChatRoom from './ChatRoom';
+import AIChatRecord from './AIChatRecord';
+import UserChat from './UserChat';
 const Stack = createStackNavigator()
-function Start(){
-  const navigation = useNavigation()//只能在函数组件中使用！返回navigation对象，有navigate,goBack,push方法
-  return(
-    <ImageBackground
-      source={require('../图片/bg.png')}
-      style={{flex:1,width:'100%',height:'100%'}}
-    >
-      <View 
-        style={{display:'flex',alignItems:'center',marginTop:height*0.25}}
-      >
-        <Image
-          source={require('../图片/l.png')}
-          style={{width:width*0.3,height:height*0.14,marginBottom:height*0.06}}
-        ></Image>
-        <Text
-          style={{color:'white',fontSize:width*0.05,textAlign:'center',letterSpacing:width*0.015
-          }}
-        >小知，你的校园生活小助手</Text>
-      </View>
-      <View
-        style={{display:'flex',alignItems:'center',marginTop:height*0.3}}
-      >
-        <Pressable
-          style={{backgroundColor:'#69B09C',width:width*0.7,height:height*0.06,borderRadius:10,marginBottom:height*0.01}}
-          onPress={()=>{navigation.navigate('Login')}}
-        >
-          <Text
-            style={{lineHeight:height*0.06,textAlign:'center',color:'white',fontSize:20}}
-          >立即登录</Text>
-        </Pressable>
-        <Pressable
-          onPress={()=>{navigation.navigate('Register')}}
-        >
-          <Text
-            style={{color:'white',fontSize:height*0.016}}
-          >还没有账号?去注册</Text>
-        </Pressable>
-      </View>
-    </ImageBackground>
-  )
-}
 export default function App(){
   return(
     <NavigationContainer>
@@ -77,6 +48,22 @@ export default function App(){
         <Stack.Screen name='PostDetail' component={PostDetail}></Stack.Screen>
         <Stack.Screen name='EditInformation' component={EditInformation}></Stack.Screen>
         <Stack.Screen name='ChangeEmail' component={ChangeEmail}></Stack.Screen>
+        <Stack.Screen name='ChangePassword' component={ChangePassword}></Stack.Screen>
+        <Stack.Screen name='OtherPeople' component={OtherPeople}></Stack.Screen>
+        <Stack.Screen name='LikeRecord' component={LikeRecord}></Stack.Screen>
+        <Stack.Screen name='ViewRecord' component={ViewRecord}></Stack.Screen>
+        <Stack.Screen name='SaveRecord' component={SaveRecord}></Stack.Screen>
+        <Stack.Screen name='MyMessage' component={MyMessage}></Stack.Screen>
+        <Stack.Screen name='Question' component={Qusetion}></Stack.Screen>
+        <Stack.Screen name='AddQuestion' component={AddQuestion}></Stack.Screen>
+        <Stack.Screen name='PostRecord' component={PostRecord}></Stack.Screen>
+        <Stack.Screen name='QuestionDetail' component={QuestionDetail}></Stack.Screen>
+        <Stack.Screen name='Search' component={Search}></Stack.Screen>
+        <Stack.Screen name='SearchPostResult' component={SearchPostResult}></Stack.Screen>
+        <Stack.Screen name='AIChat' component={AIChat}></Stack.Screen>
+        <Stack.Screen name='ChatRoom' component={ChatRoom}></Stack.Screen>
+        <Stack.Screen name='AIChatRecord' component={AIChatRecord}></Stack.Screen>
+        <Stack.Screen name='UserChat' component={UserChat}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

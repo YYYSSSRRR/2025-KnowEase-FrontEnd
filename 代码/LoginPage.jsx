@@ -67,7 +67,7 @@ function Framework({children,handleSubmit1,handleSubmit2,pwLogin,isChecked,setPw
                     <Text style={{lineHeight:width*0.04,textAlign:'center',fontSize:width*0.04}}>{isChecked?'√':''}</Text>
                 </Pressable>
                 <Text style={{lineHeight:width*0.04,marginTop:height*0.02,fontSize:width*0.03}}>已阅读并同意</Text>
-                <Pressable >
+                <Pressable>
                     <Text style={{lineHeight:width*0.04,marginTop:height*0.02,fontSize:width*0.03,color:'red'}}>用户协议、隐私政策</Text>
                 </Pressable>
                 

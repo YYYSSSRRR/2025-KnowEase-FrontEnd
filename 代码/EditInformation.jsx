@@ -11,7 +11,6 @@ const styles=StyleSheet.create({
     returnButton:{
         height:height*0.025,
         width:height*0.04,
-        // marginTop:height*0.06,
         marginLeft:width*0.05
     },
     profile:{
@@ -53,11 +52,13 @@ const styles=StyleSheet.create({
 export default function EditInformation(){
     const [profile,setProfile]=useState('');
     const [editStatus,setEditStatus]=useState(true);
+    const [backgroundEditStatus,setBackgroundEditStatus]=useState(true)
     const [nameEditStatus,setNameEditStatus]=useState(true);
     const [username,setUsername]=useState('');
     const [email,setEmail]=useState('');
+    const [backgroundImage,setBackgroundImage]=useState('');
     const navigation=useNavigation();
-    async function uploadQiniu(file){
+    async function uploadQiniu(file,key){
         const tokenData=await AsyncStorage.getItem('token');
         try{
             const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
@@ -80,15 +81,12 @@ export default function EditInformation(){
                 }
             })
             .then(response=>{
-                console.log(response.data);
                 const data=response.data;
-                if(data.key){
-                    console.log('上传成功',data);
+                if(key==='profile'){
                     setProfile('https://mini-project.muxixyz.com/'+data.key);
-                    // console.log(imageUrl);
                 }
-                else{
-                    console.log('失败')
+                else if(key==='background'){
+                    setBackgroundImage('https://mini-project.muxixyz.com/'+data.key)
                 }
             })
             .catch(error=>{
@@ -117,7 +115,7 @@ export default function EditInformation(){
             }
             return true;
         };
-    const pickImage=async()=>{
+    const pickImage=async(key)=>{
         const permissionGranted=await requestPermission();
         if(!permissionGranted) return;
         const result=await ImagePicker.launchImageLibraryAsync({
@@ -132,9 +130,14 @@ export default function EditInformation(){
                 type:result.assets[0].mimeType,
                 name:result.assets[0].fileName
             }
-            await uploadQiniu(file);
+            await uploadQiniu(file,key);
         }
-        setEditStatus(!editStatus)
+        if(key==='profile'){
+            setEditStatus(!editStatus);
+        }
+        else if(key==='background'){
+            setBackgroundEditStatus(!backgroundEditStatus);
+        }
     }
     async function handleSubmit(){
         const userId=await AsyncStorage.getItem('userId');
@@ -152,6 +155,24 @@ export default function EditInformation(){
             AsyncStorage.setItem('profile',profile)
         })
         .catch(err=>console.log(err))
+    }
+    async function handleChangeBackground(){
+        const userId=await AsyncStorage.getItem('userId');
+        const token=await AsyncStorage.getItem('token');
+        axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterbackground`,{
+            backgroundURL:backgroundImage
+        },{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        })
+        .then(()=>{
+            setBackgroundEditStatus(!backgroundEditStatus);
+            AsyncStorage.setItem('backgroundImage',backgroundImage)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
     async function handleChangeName() {
         console.log('正在修改')
@@ -176,10 +197,11 @@ export default function EditInformation(){
             const profile=await AsyncStorage.getItem('profile');
             const username=await AsyncStorage.getItem('userName');
             const email=await AsyncStorage.getItem('email');
+            const backgroundImage=await AsyncStorage.getItem('backgroundImage')
             setProfile(profile);
             setUsername(username);
             setEmail(email);
-            console.log(email)
+            setBackgroundImage(backgroundImage)
         }
         fetchProfile();
     },[])
@@ -196,7 +218,7 @@ export default function EditInformation(){
             </View>
             <Image source={{uri:profile}} style={styles.profile}></Image>
             <Pressable
-                onPress={editStatus?pickImage:handleSubmit}
+                onPress={editStatus?()=>{pickImage('profile')}:handleSubmit}
             >
                 <Image source={editStatus?require('../图片/编辑 (1)(1).png'):require('../图片/提交 (2)(1).png')} style={styles.profileEditButton}></Image>
             </Pressable>
@@ -244,6 +266,36 @@ export default function EditInformation(){
                             }}
                         >
                             <Image source={require('../图片/编辑 (2)(1).png')} style={styles.editIcon}></Image>
+                        </Pressable>
+                    </View>
+                </View>
+                <View>
+                    <Text
+                        style={{fontSize:width*0.04,color:'#A4A4A4'}}
+                    >
+                        密码
+                    </Text>
+                    <View style={styles.input}>
+                        <Text style={{width:width*0.8,height:height*0.05,lineHeight:height*0.05,fontSize:width*0.04}} >******</Text>
+                        <Pressable
+                            onPress={()=>{
+                                navigation.navigate('ChangePassword')
+                            }}
+                        >
+                            <Image source={require('../图片/编辑 (2)(1).png')} style={styles.editIcon}></Image>
+                        </Pressable>
+                    </View>
+                </View>
+                <View>
+                    <Text
+                        style={{fontSize:width*0.04,color:'#A4A4A4'}}
+                    >
+                        背景图
+                    </Text>
+                    <View style={styles.input}>
+                        <Image source={{uri:backgroundImage}} style={{height:height*0.1,width:width*0.3,marginTop:height*0.02,marginRight:width*0.5}}></Image>
+                        <Pressable onPress={backgroundEditStatus?()=>{pickImage('background')}:handleChangeBackground}>
+                            <Image source={backgroundEditStatus?require('../图片/编辑 (2)(1).png'):require('../图片/提交成功(1).png')} style={styles.editIcon}></Image>
                         </Pressable>
                     </View>
                 </View>
