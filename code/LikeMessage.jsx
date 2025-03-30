@@ -56,7 +56,7 @@ export default function LikeMessage(){
         const fetchlist=async()=>{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            axios.get(`http://8.152.214.138:8080/api/message/${userId}/view/like/gethistory`,{
+            axios.get(`https://mini.knowease2025.com/api/message/${userId}/view/like/gethistory`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }

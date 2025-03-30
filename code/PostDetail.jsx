@@ -93,7 +93,7 @@ export default function PostDetail({route}){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/getstatus`,{
+            const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/getstatus`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -101,7 +101,7 @@ export default function PostDetail({route}){
             setLikeStatusMap((pre)=>({...pre,[PostID]:response.data.LikeStatus}))
             setSaveStatusMap((pre)=>({...pre,[PostID]:response.data.SaveStatus}))
             
-            const data=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}`,{
+            const data=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -114,7 +114,7 @@ export default function PostDetail({route}){
             setPosterid(data.data.postMessage.posterid);
             setProfileUrl(data.data.postMessage.PosterURL)
             // setLike(likeStatusMap[PostID]||false);
-            const information=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/getcounts`,{
+            const information=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/getcounts`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -129,7 +129,7 @@ export default function PostDetail({route}){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            const data=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}`,{
+            const data=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -143,14 +143,14 @@ export default function PostDetail({route}){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/getstatus`,{
+            const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/getstatus`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
             })
             setLikeStatusMap((pre)=>({...pre,[PostID]:response.data.LikeStatus}))
             setSaveStatusMap((pre)=>({...pre,[PostID]:response.data.SaveStatus}))
-            const information=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/getcounts`,{
+            const information=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/getcounts`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -164,7 +164,7 @@ export default function PostDetail({route}){
     async function uploadQiniu(file,status,commentid){
         console.log('qiniu')
         const tokenData=await AsyncStorage.getItem('token');
-        const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
+        const uploadToken=await axios.get('https://mini.knowease2025.com/api/getToken',{
             headers:{
                 'Authorization':`Bearer ${tokenData}`
             }
@@ -250,7 +250,7 @@ export default function PostDetail({route}){
     async function handleSubmit(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-            axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/publishcomment`,{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/publishcomment`,{
                 imageurl:commentImage,
                 body:addComment
             },{
@@ -274,7 +274,7 @@ export default function PostDetail({route}){
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
             if(!likeStatusMap[PostID]){
-                axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/like`,{},{
+                axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/like`,{},{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -294,7 +294,7 @@ export default function PostDetail({route}){
                 }})
             }
             else{
-                axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/cancellike`,{},{
+                axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/cancellike`,{},{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -326,7 +326,7 @@ export default function PostDetail({route}){
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
             if(!saveStatusMap[PostID]){
-                axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/save`,{},{
+                axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/save`,{},{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -345,7 +345,7 @@ export default function PostDetail({route}){
                 }})
             }
             else{
-                axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/cancelsave`,{},{
+                axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/cancelsave`,{},{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }

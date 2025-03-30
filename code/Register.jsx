@@ -29,7 +29,7 @@ export default function Register(){
     const [verifiation,setVerifiation]=useState('')
     const [email,setEmail]=useState('')
     function onSendVerification(){
-        axios.post('http://8.152.214.138:8080/api/register/sendemail',{
+        axios.post('https://mini.knowease2025.com/api/register/sendemail',{
             email:email
         })
         .then(()=>console.log('success'))
@@ -40,7 +40,7 @@ export default function Register(){
     }
     function handleSubmit(){
         if(isChecked){
-            axios.post('http://8.152.214.138:8080/api/register/sendemail/verifycode',{
+            axios.post('https://mini.knowease2025.com/api/register/sendemail/verifycode',{
                 code:verifiation
             })
             .then(()=>{

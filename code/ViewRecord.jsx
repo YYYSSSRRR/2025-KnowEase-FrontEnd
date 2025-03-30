@@ -107,7 +107,7 @@ export default function ViewRecord(){
             const userId=await AsyncStorage.getItem('userId')
             const token=await AsyncStorage.getItem('token')
             if(status==='life')
-            {const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/userpage/viewrecord/life`,{
+            {const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/userpage/viewrecord/life`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -115,7 +115,7 @@ export default function ViewRecord(){
             setLifePost(response.data.LikeRecord);
             }
             else if(status==='问答'){
-                const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/userpage/viewrecord/qa`,{
+                const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/userpage/viewrecord/qa`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }

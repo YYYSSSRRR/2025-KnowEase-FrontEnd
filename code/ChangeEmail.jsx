@@ -40,7 +40,7 @@ export default function ChangeEmail(){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/sendemail`,{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/sendemail`,{
                 email:email
             },{
                 headers:{
@@ -60,7 +60,7 @@ export default function ChangeEmail(){
     async function handleSubmit() {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alteremail`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/alteremail`,{
             code:verifiation,
             email:email
         },{

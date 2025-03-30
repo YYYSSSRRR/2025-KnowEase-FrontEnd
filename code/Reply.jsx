@@ -13,7 +13,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         console.log('sending')
-        axios.post(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${commentid}/publishreply`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/${commentid}/publishreply`,{
             imageurl:replyImageMap[id]||'',
             body:replyMap[id]||''
         },{
@@ -32,7 +32,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
     async function uploadQiniu(file,commentid){
         console.log('qiniu')
         const tokenData=await AsyncStorage.getItem('token');
-        const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
+        const uploadToken=await axios.get('https://mini.knowease2025.com/api/getToken',{
             headers:{
                 'Authorization':`Bearer ${tokenData}`
             }
@@ -110,7 +110,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
     async function updateReply(commentid,replyid) {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${commentid}/${replyid}/getstatus`,{
+        axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/${commentid}/${replyid}/getstatus`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -119,7 +119,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
             setReplyStatusMap((pre)=>({...pre,[replyid]:response.data.LikeStatus}))
         })
         .catch(err=>console.log(err));
-        axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${commentid}/${replyid}/getcounts`,{
+        axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/${commentid}/${replyid}/getcounts`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -133,7 +133,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(!replyStatusMap[replyid])
-        {axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/${commentid}/${replyid}/like`,{},{
+        {axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/${commentid}/${replyid}/like`,{},{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -143,7 +143,7 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
         })
         .catch(err=>console.log(err.response.data))}
         else{
-            axios.post(`http://8.152.214.138:8080/api/${userId}/life/${PostID}/${commentid}/${replyid}/cancellike`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/life/${PostID}/${commentid}/${replyid}/cancellike`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -160,12 +160,12 @@ export default function Reply({a,name,update,pickImage,uploadQiniu,handleSubmitR
                 const userId = await AsyncStorage.getItem('userId');
                 const token = await AsyncStorage.getItem('token');
                 const requests = a.Reply.map(async (b) => {
-                    const response = await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getcounts`, {
+                    const response = await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getcounts`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
                     });
-                    const data = await axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getstatus`, {
+                    const data = await axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/${a.commentid}/${b.commentid}/getstatus`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

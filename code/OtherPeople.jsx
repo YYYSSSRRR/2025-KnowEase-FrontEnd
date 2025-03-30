@@ -115,7 +115,7 @@ export default function OtherPeople({route}){
     async function update() {
         try{
             const token=await AsyncStorage.getItem('token');
-            const response=await axios.get(`http://8.152.214.138:8080/api/${posterid}/userpage/count`,{
+            const response=await axios.get(`https://mini.knowease2025.com/api/${posterid}/userpage/count`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -123,7 +123,7 @@ export default function OtherPeople({route}){
             setFollowCount(response.data.FolloweeCount);
             setFansCount(response.data.FollowerCount);
             setGetLikeCount(response.data.LikesCount);
-            const result=await axios.get(`http://8.152.214.138:8080/api/userpage/${posterid}`,{
+            const result=await axios.get(`https://mini.knowease2025.com/api/userpage/${posterid}`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -132,7 +132,7 @@ export default function OtherPeople({route}){
             setBackgroundImage(result.data.backgroundUrl);
             setUserName(result.data.username);
             const userId=await AsyncStorage.getItem('userId');
-            const status=await axios.get(`http://8.152.214.138:8080/api/${userId}/userpage/${posterid}/getstatus`,{
+            const status=await axios.get(`https://mini.knowease2025.com/api/${userId}/userpage/${posterid}/getstatus`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -147,7 +147,7 @@ export default function OtherPeople({route}){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(!followStatus){
-            axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/${posterid}/follow`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/${posterid}/follow`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -161,7 +161,7 @@ export default function OtherPeople({route}){
             })
         }
         else{
-            axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/${posterid}/cancelfollow`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/${posterid}/cancelfollow`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -179,7 +179,7 @@ export default function OtherPeople({route}){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(status==='问答'){
-            axios.get(`http://8.152.214.138:8080/api/userpage/${posterid}/getuserqa`,{
+            axios.get(`https://mini.knowease2025.com/api/userpage/${posterid}/getuserqa`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -191,7 +191,7 @@ export default function OtherPeople({route}){
             .catch(err=>{console.log(err)})
         }
         else{
-            axios.get(`http://8.152.214.138:8080/api/userpage/${posterid}/getuserpost`,{
+            axios.get(`https://mini.knowease2025.com/api/userpage/${posterid}/getuserpost`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }

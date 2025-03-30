@@ -103,7 +103,7 @@ export default function LoginPage(){
     const email=useRef('')
     function handleSubmit1(){
         if(isChecked){
-            axios.post('http://8.152.214.138:8080/api/login/bypassword',{
+            axios.post('https://mini.knowease2025.com/api/login/bypassword',{
                 email:email.current,
                 password:password.current
             })
@@ -143,7 +143,7 @@ export default function LoginPage(){
     }
     function handleSubmit2(){
         if(isChecked){
-            axios.post('http://8.152.214.138:8080/api/login/sendemail/verifycode',{
+            axios.post('https://mini.knowease2025.com/api/login/sendemail/verifycode',{
                 code:verifiation.current,
                 email:email.current
             })
@@ -171,7 +171,7 @@ export default function LoginPage(){
         verifiation.current=value
     }
     const handleSendVerification=()=>{
-        axios.post('http://8.152.214.138:8080/api/login/sendemail',{
+        axios.post('https://mini.knowease2025.com/api/login/sendemail',{
             email:email.current
         })
         .then(()=>console.log('success'))

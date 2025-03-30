@@ -4,7 +4,7 @@ async function uploadQiniu(file,setImageUrl){
     console.log('running')
     const tokenData=await AsyncStorage.getItem('token');
     try{
-        const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
+        const uploadToken=await axios.get('https://mini.knowease2025.com/api/getToken',{
             headers:{
                 'Authorization':`Bearer ${tokenData}`
             }

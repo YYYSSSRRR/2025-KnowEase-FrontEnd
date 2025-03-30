@@ -32,7 +32,7 @@ export default function SetPassword({route}){
     const [password,setPassword]=useState('')
     function handleSubmit(){
         if(password===confirm){
-            axios.post('http://8.152.214.138:8080/api/register/sendemail/verifycode/sendmessage',{
+            axios.post('https://mini.knowease2025.com/api/register/sendemail/verifycode/sendmessage',{
                 email:email,
                 id:'',
                 password:password,

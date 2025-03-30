@@ -189,7 +189,7 @@ export default function AIChat(){
     const sendMessage=async ()=>{
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        const eventSource=new EventSource(`http://8.152.214.138:8080/api/aichat/${userId}/sseconnect`);
+        const eventSource=new EventSource(`https://mini.knowease2025.com/api/aichat/${userId}/sseconnect`);
         eventSource.onopen=()=>{
             console.log('sse连接已连接');
         }
@@ -199,7 +199,7 @@ export default function AIChat(){
         setMessages(newMessages);
         setInputText('');
         setIsTyping(true);
-        axios.post(`http://8.152.214.138:8080/api/aichat/chat/${userId}/postchat`,{
+        axios.post(`https://mini.knowease2025.com/api/aichat/chat/${userId}/postchat`,{
             request:inputText
         },{
             headers:{
@@ -235,7 +235,7 @@ export default function AIChat(){
     const getMessage=async()=>{
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/aichat/${userId}/search/gethistory`,{
+        axios.get(`https://mini.knowease2025.com/api/aichat/${userId}/search/gethistory`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }

@@ -113,7 +113,7 @@ export default function My(){
     async function update() {
         try{
             const token=await AsyncStorage.getItem('token');
-            const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/userpage/likecount`,{
+            const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/userpage/likecount`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -129,7 +129,7 @@ export default function My(){
     }
     async function handleLogOut(){
         const token=await AsyncStorage.getItem('token');
-        axios.post('http://8.152.214.138:8080/api/logout',{},{
+        axios.post('https://mini.knowease2025.com/api/logout',{},{
             headers:{
                 'Authorization':`Bearer ${token}`
             }

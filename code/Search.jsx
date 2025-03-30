@@ -72,7 +72,7 @@ export default function Search(){
         async function handleSearch(text) {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/search`,{
+        axios.post(`https://mini.knowease2025.com/api/search`,{
             searchmessage:text,
             userid:userId
         },{
@@ -92,7 +92,7 @@ export default function Search(){
     async function handleGetList() {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/search/gethotrank`,{
+        axios.get(`https://mini.knowease2025.com/api/search/gethotrank`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -106,7 +106,7 @@ export default function Search(){
     async function handleClickSearch(text) {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/search/syncRecord`,{
+        axios.post(`https://mini.knowease2025.com/api/search/syncRecord`,{
             searchmessage:text,
             userid:userId
         },{
@@ -127,7 +127,7 @@ export default function Search(){
     async function handleGetSearchRecord() {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/search/${userId}/getrecord`,{
+        axios.get(`https://mini.knowease2025.com/api/search/${userId}/getrecord`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -143,7 +143,7 @@ export default function Search(){
     async function handleGuessSearch() {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/search/${userId}/recommend`,{},{
+        axios.post(`https://mini.knowease2025.com/api/search/${userId}/recommend`,{},{
             headers:{
                 'Authorization':`Bearer ${token}`
             }

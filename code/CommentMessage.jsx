@@ -54,7 +54,7 @@ export default function CommentMessage(){
         const fetchlist=async()=>{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            axios.get(`http://8.152.214.138:8080/api/message/${userId}/view/comment/gethistory`,{
+            axios.get(`https://mini.knowease2025.com/api/message/${userId}/view/comment/gethistory`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }

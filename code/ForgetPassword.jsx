@@ -29,7 +29,7 @@ export default function ForgetPassword(){
     const [verifiation,setVerifiation]=useState('')
     const [email,setEmail]=useState('')
     function onSendVerification(){
-        axios.post('http://8.152.214.138:8080/api/forgetPassword/sendemail',{
+        axios.post('https://mini.knowease2025.com/api/forgetPassword/sendemail',{
             email:email
         })
         .then(()=>console.log('success'))
@@ -40,7 +40,7 @@ export default function ForgetPassword(){
     }
     function handleSubmit(){
         if(isChecked){
-            axios.post('http://8.152.214.138:8080/api/forgetPassword/sendemail/verifycode',{
+            axios.post('https://mini.knowease2025.com/api/forgetPassword/sendemail/verifycode',{
                 code:verifiation
             })
             .then(()=>{

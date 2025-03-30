@@ -70,7 +70,7 @@ export default function MyMessage(){
     async function getChatroom(){
         const token=await AsyncStorage.getItem('token');
         const userId=await AsyncStorage.getItem('userId');
-        axios.get(`http://8.152.214.138:8080/api/message/${userId}/getchatrooms`,{
+        axios.get(`https://mini.knowease2025.com/api/message/${userId}/getchatrooms`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -87,7 +87,7 @@ export default function MyMessage(){
     async function getUnread(){
         const token=await AsyncStorage.getItem('token');
         const userId=await AsyncStorage.getItem('userId');
-        axios.get(`http://8.152.214.138:8080/api/message/${userId}/getunread`,{
+        axios.get(`https://mini.knowease2025.com/api/message/${userId}/getunread`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }

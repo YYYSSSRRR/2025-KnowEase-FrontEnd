@@ -107,7 +107,7 @@ export default function PostRecord(){
             const userId=await AsyncStorage.getItem('userId')
             const token=await AsyncStorage.getItem('token')
             if(status==='life')
-            {const response=await axios.get(`http://8.152.214.138:8080/api/userpage/${userId}/getuserpost`,{
+            {const response=await axios.get(`https://mini.knowease2025.com/api/userpage/${userId}/getuserpost`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -115,7 +115,7 @@ export default function PostRecord(){
             setLifePost(response.data.Posts);
             }
             else if(status==='问答'){
-                const response=await axios.get(`http://8.152.214.138:8080/api/userpage/${userId}/getuserqa`,{
+                const response=await axios.get(`https://mini.knowease2025.com/api/userpage/${userId}/getuserqa`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }

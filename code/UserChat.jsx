@@ -112,14 +112,14 @@ export default function UserChat({route}){
         const myId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         
-        axios.get(`http://8.152.214.138:8080/api/userpage/${myId}/chat/${userId}/initchat`,{
+        axios.get(`https://mini.knowease2025.com/api/userpage/${myId}/chat/${userId}/initchat`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
         })
         .then((data)=>{
             setChatid(data.data.chatmessage.chatid);
-            axios.get(`http://8.152.214.138:8080/api/chat/${myId}/view/${data.data.chatmessage.chatid}/gethistory`,{
+            axios.get(`https://mini.knowease2025.com/api/chat/${myId}/view/${data.data.chatmessage.chatid}/gethistory`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -135,7 +135,7 @@ export default function UserChat({route}){
     }
     async function sendMessage(){
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/chat/postmessage`,{
+        axios.post(`https://mini.knowease2025.com/api/chat/postmessage`,{
             chatid:chatid,
             content:inputText,
             reciverid:userId,
@@ -171,11 +171,11 @@ export default function UserChat({route}){
         const connectws=async()=>{
             const token=await AsyncStorage.getItem('token');
             const myId=await AsyncStorage.getItem('userId');
-            const result=await axios.get(`http://8.152.214.138:8080/api/userpage/${myId}/chat/${userId}/initchat`)
+            const result=await axios.get(`https://mini.knowease2025.com/api/userpage/${myId}/chat/${userId}/initchat`)
             const chatid=result.data.chatmessage.chatid;
             console.log(chatid)
             console.log(myId)
-            const websocket = new WebSocket(`ws://8.152.214.138:8080/api/chat/${myId}/${chatid}/get`);
+            const websocket = new WebSocket(`wss://mini.knowease2025.com:8080/api/chat/${myId}/${chatid}/get`);
             
             websocket.onopen=()=>{
                 console.log('websocket opened');

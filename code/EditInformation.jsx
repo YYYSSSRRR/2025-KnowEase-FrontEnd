@@ -61,7 +61,7 @@ export default function EditInformation(){
     async function uploadQiniu(file,key){
         const tokenData=await AsyncStorage.getItem('token');
         try{
-            const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
+            const uploadToken=await axios.get('https://mini.knowease2025.com/api/getToken',{
                 headers:{
                     'Authorization':`Bearer ${tokenData}`
                 }
@@ -142,7 +142,7 @@ export default function EditInformation(){
     async function handleSubmit(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterimage`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/alterimage`,{
             url:profile
         },{
             headers:{
@@ -159,7 +159,7 @@ export default function EditInformation(){
     async function handleChangeBackground(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterbackground`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/alterbackground`,{
             backgroundURL:backgroundImage
         },{
             headers:{
@@ -178,7 +178,7 @@ export default function EditInformation(){
         console.log('正在修改')
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        await axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterusername`,{
+        await axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/alterusername`,{
             username:username
         },{
             headers:{

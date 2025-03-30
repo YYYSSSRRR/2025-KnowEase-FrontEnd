@@ -82,7 +82,7 @@ export default function AIChatRecord(){
     const getRecord=async()=>{
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/aichat/${userId}/search/gethistory`,{
+        axios.get(`https://mini.knowease2025.com/api/aichat/${userId}/search/gethistory`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }

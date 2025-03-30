@@ -106,7 +106,7 @@ export default function AddPost(){
             console.log('successful');
             console.log(tokenData)
             try{
-                const uploadToken=await axios.get('http://8.152.214.138:8080/api/getToken',{
+                const uploadToken=await axios.get('https://mini.knowease2025.com/api/getToken',{
                     headers:{
                         'Authorization':`Bearer ${tokenData}`
                     }
@@ -187,7 +187,7 @@ export default function AddPost(){
         const userId=await AsyncStorage.getItem('userId')
         const tokenData=await AsyncStorage.getItem('token')
         console.log('发布')
-        axios.post(`http://8.152.214.138:8080/api/${userId}/post/publish`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/post/publish`,{
             body:content,
             tag:tag,
             title:title,

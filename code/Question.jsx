@@ -199,7 +199,7 @@ export default function Qusetion(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(!isGood){
-            axios.post(`http://8.152.214.138:8080/api/QA/getbytag`,{
+            axios.post(`https://mini.knowease2025.com/api/QA/getbytag`,{
                 tag:"",
                 userid:userId
             },{
@@ -218,7 +218,7 @@ export default function Qusetion(){
             })
         }
         else{
-            axios.post(`http://8.152.214.138:8080/api/QA/getgoodqa`,{
+            axios.post(`https://mini.knowease2025.com/api/QA/getgoodqa`,{
                 tag:"",
                 userId:userId
             },{

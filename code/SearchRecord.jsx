@@ -69,7 +69,7 @@ export default function SearchRecord({searchRecord,handleGetSearchRecord}){
     async function handleDeleteAll() {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.delete(`http://8.152.214.138:8080/api/search/${userId}/deleteall`,{
+        axios.delete(`https://mini.knowease2025.com/api/search/${userId}/deleteall`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -85,7 +85,7 @@ export default function SearchRecord({searchRecord,handleGetSearchRecord}){
     async function handleSearch(message) {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/search`,{
+        axios.post(`https://mini.knowease2025.com/api/search`,{
             searchmessage:message,
             userid:userId
         },{
@@ -107,7 +107,7 @@ export default function SearchRecord({searchRecord,handleGetSearchRecord}){
     async function handleDelete(message) {
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/search/delete`,{
+        axios.post(`https://mini.knowease2025.com/api/search/delete`,{
             searchmessage:message,
             userid:userId
         },{

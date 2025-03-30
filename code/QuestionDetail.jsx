@@ -84,7 +84,7 @@ export default function QuestionDetail({route}){
     const update=async ()=>{
         const token=await AsyncStorage.getItem('token');
         const userId=await AsyncStorage.getItem('userId');
-        axios.get(`http://8.152.214.138:8080/api/QA/${userId}/${PostID}`,{
+        axios.get(`https://mini.knowease2025.com/api/QA/${userId}/${PostID}`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -101,7 +101,7 @@ export default function QuestionDetail({route}){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            const data=await axios.get(`http://8.152.214.138:8080/api/QA/${PostID}`,{
+            const data=await axios.get(`https://mini.knowease2025.com/api/QA/${PostID}`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -114,7 +114,7 @@ export default function QuestionDetail({route}){
     const updateStatus=async ()=>{
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.get(`http://8.152.214.138:8080/api/${userId}/post/${PostID}/getstatus`,{
+        axios.get(`https://mini.knowease2025.com/api/${userId}/post/${PostID}/getstatus`,{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -132,7 +132,7 @@ export default function QuestionDetail({route}){
         try{
             const userId=await AsyncStorage.getItem('userId');
             const token=await AsyncStorage.getItem('token');
-            const response=await axios.get(`http://8.152.214.138:8080/api/${userId}/QA/${PostID}/getcounts`,{
+            const response=await axios.get(`https://mini.knowease2025.com/api/${userId}/QA/${PostID}/getcounts`,{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -150,7 +150,7 @@ export default function QuestionDetail({route}){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(!LikeStatus)
-        {axios.post(`http://8.152.214.138:8080/api/${userId}/qa/${PostID}/like`,{},{
+        {axios.post(`https://mini.knowease2025.com/api/${userId}/qa/${PostID}/like`,{},{
             headers:{
                 'Authorization':`Bearer ${token}`
             }
@@ -164,7 +164,7 @@ export default function QuestionDetail({route}){
         )
         .catch(err=>{console.log(err.response.data)})}
         else{
-            axios.post(`http://8.152.214.138:8080/api/${userId}/qa/${PostID}/cancellike`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/qa/${PostID}/cancellike`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -181,7 +181,7 @@ export default function QuestionDetail({route}){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         if(SaveStatus){
-            axios.post(`http://8.152.214.138:8080/api/${userId}/qa/${PostID}/cancelsave`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/qa/${PostID}/cancelsave`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -196,7 +196,7 @@ export default function QuestionDetail({route}){
             })
         }
         else{
-            axios.post(`http://8.152.214.138:8080/api/${userId}/qa/${PostID}/save`,{},{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/qa/${PostID}/save`,{},{
                 headers:{
                     'Authorization':`Bearer ${token}`
                 }
@@ -214,7 +214,7 @@ export default function QuestionDetail({route}){
     const handleSubmitComment=async ()=>{
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
-        axios.post(`http://8.152.214.138:8080/api/${userId}/qa/${PostID}/publishcomment`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/qa/${PostID}/publishcomment`,{
 
             body:addComment
         },{

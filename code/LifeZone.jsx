@@ -197,7 +197,7 @@ export default function LifeZone(){
             const userId=await AsyncStorage.getItem('userId')
             const token=await AsyncStorage.getItem('token')
             if(tag==='校园'){
-                const result=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/campus`,{
+                const result=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/campus`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -205,7 +205,7 @@ export default function LifeZone(){
                 setCampusPosts(result.data.posts);
             }
             else if(tag==='life'){
-                const result=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/life`,{
+                const result=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/life`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -213,7 +213,7 @@ export default function LifeZone(){
                 setCampusPosts(result.data.posts);
             }
             else if(tag==='绘画'){
-                const result=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/paint`,{
+                const result=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/paint`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -221,7 +221,7 @@ export default function LifeZone(){
                 setCampusPosts(result.data.posts);
             }
             else if(tag==='美食'){
-                const result=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/food`,{
+                const result=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/food`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }
@@ -229,7 +229,7 @@ export default function LifeZone(){
                 setCampusPosts(result.data.posts);
             }
             else if(tag==='推荐'){
-                const result=await axios.get(`http://8.152.214.138:8080/api/${userId}/post/recommend`,{
+                const result=await axios.get(`https://mini.knowease2025.com/api/${userId}/post/recommend`,{
                     headers:{
                         'Authorization':`Bearer ${token}`
                     }

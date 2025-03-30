@@ -67,7 +67,7 @@ export default function AddQuestion(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         console.log(111)
-        axios.post(`http://8.152.214.138:8080/api/${userId}/QA/similarity`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/QA/similarity`,{
             question:question,
         },{
             headers:{
@@ -90,7 +90,7 @@ export default function AddQuestion(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token');
         
-        axios.post(`http://8.152.214.138:8080/api/${userId}/QA/publish`,{
+        axios.post(`https://mini.knowease2025.com/api/${userId}/QA/publish`,{
             question:question,
             tag:tag
         },{

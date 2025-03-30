@@ -32,7 +32,7 @@ export default function ResetPassword({route}){
     const [password,setPassword]=useState('')
     function handleSubmit(){
         if(password===confirm){
-            axios.post('http://8.152.214.138:8080/api/forgetPassword/sendemail/verifycode/update',{
+            axios.post('https://mini.knowease2025.com/api/forgetPassword/sendemail/verifycode/update',{
                 email:email,
                 password:password,
             })

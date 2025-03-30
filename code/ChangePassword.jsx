@@ -41,7 +41,7 @@ export default function ChangePassword(){
         const userId=await AsyncStorage.getItem('userId');
         const token=await AsyncStorage.getItem('token')
         if(password===confirm){
-            axios.post(`http://8.152.214.138:8080/api/${userId}/userpage/alterpassword`,{
+            axios.post(`https://mini.knowease2025.com/api/${userId}/userpage/alterpassword`,{
                 password:password,
             },{
                 headers:{
